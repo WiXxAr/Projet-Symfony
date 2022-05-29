@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+    	<title>Home</title>
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<link rel="icon" type="image/png" href={{ asset('images/icons/favicon.png') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('vendor/bootstrap/css/bootstrap.min.css') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('fonts/font-awesome-4.7.0/css/font-awesome.min.css') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('fonts/iconic/css/material-design-iconic-font.min.css') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('fonts/linearicons-v1.0.0/icon-font.min.css') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('vendor/animate/animate.css') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('vendor/css-hamburgers/hamburgers.min.css') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('vendor/animsition/css/animsition.min.css') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('vendor/select2/select2.min.css') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('vendor/daterangepicker/daterangepicker.css') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('vendor/slick/slick.css') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('vendor/MagnificPopup/magnific-popup.css') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('vendor/perfect-scrollbar/perfect-scrollbar.css') }} />
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href={{ asset('js/main.js') }} />
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href={{ asset('js/map-custom.js') }} />
+    <!--===============================================================================================-->
+      <link rel="stylesheet" type="text/css" href={{ asset('js/slick-custom.js') }} />
+    <!--===============================================================================================-->
+    	<link rel="stylesheet" type="text/css" href={{ asset('css/util.css') }} />
+    	<link rel="stylesheet" type="text/css" href={{ asset('css/main.css') }} />
+    <!--===============================================================================================-->
+    </head>
+    <!-- <body class="animsition"> -->
+    <body>
+      <nav class="navbar sticky-top navbar-light bg-light">
+        <div class="container">
+
+
+        <!-- Logo desktop -->
+        <a href="/" class="logo">
+          <img src="../images/icons/logo.png" alt="IMG-LOGO">
+        </a>
+
+        <!-- Menu desktop -->
+        <div class="menu-desktop">
+          <ul class="main-menu">
+            <li class="active-menu">
+              <a href="/">Accueil</a>
+            </li>
+
+            <li>
+              <a href="">Boutique</a>
+              <ul class="sub-menu">
+                <li><a href="/homme">Homme</a></li>
+                <li><a href="/femme">Femme</a></li>
+                <li><a href="/enfant">Enfant</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+
+        <!-- Icon header -->
+        {% if app.user == false %}
+
+        <div class="wrap-icon-header flex-w flex-r-m">
+          <a href="/login" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+            <i class="zmdi zmdi-account"></i>
+          </a>
+        </div>
+      {% endif %}
+
+                {% if app.user == true %}
+                    {% for role in app.user.roles %}
+                        {% if role == "ROLE_USER" %}
+                          <div class="col-2">
+                            <button class="btn btn-dark btn-sm" onclick="window.location.href ='/logout';" style="/*position: absolute; bottom:50px; right: -10px; */">Se déconnecter</button>
+                          </div>
+                        {% elseif role == "ROLE_ADMIN" %}
+                        <div class="col-1">
+                          <button class="btn btn-dark btn-sm " onclick="window.location.href = '/produit/new';" style="/*position: absolute; bottom:50px; right: 100px; */">Ajouter Produit</button>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+               {% endif %}
+
+          <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+              <a href="/cart">
+                  <i class="zmdi zmdi-shopping-cart"></i>
+              </a>
+          </div>
+        </div>
+      </nav>
+
+
+      {% block body %}
+      {% endblock %}
+
+      <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+      <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+      <script src="vendor/bootstrap/js/popper.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+      <script src="vendor/select2/select2.min.js"></script>
+      <script>
+        $(".js-select2").each(function(){
+          $(this).select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $(this).next('.dropDownSelect2')
+          });
+        })
+      </script>
+    <!--===============================================================================================-->
+      <script src="vendor/daterangepicker/moment.min.js"></script>
+      <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+      <script src="vendor/slick/slick.min.js"></script>
+      <script src="js/slick-custom.js"></script>
+    <!--===============================================================================================-->
+      <script src="vendor/parallax100/parallax100.js"></script>
+      <script>
+            $('.parallax100').parallax100();
+      </script>
+    <!--===============================================================================================-->
+      <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+      <script>
+        $('.gallery-lb').each(function() { // the containers for all your galleries
+          $(this).magnificPopup({
+                delegate: 'a', // the selector for gallery item
+                type: 'image',
+                gallery: {
+                  enabled:true
+                },
+                mainClass: 'mfp-fade'
+            });
+        });
+      </script>
+    <!--===============================================================================================-->
+      <script src="vendor/isotope/isotope.pkgd.min.js"></script>
+    <!--===============================================================================================-->
+      <script src="vendor/sweetalert/sweetalert.min.js"></script>
+      <script>
+        $('.js-addwish-b2').on('click', function(e){
+          e.preventDefault();
+        });
+
+        $('.js-addwish-b2').each(function(){
+          var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+          $(this).on('click', function(){
+            swal(nameProduct, "is added to wishlist !", "success");
+
+            $(this).addClass('js-addedwish-b2');
+            $(this).off('click');
+          });
+        });
+
+        $('.js-addwish-detail').each(function(){
+          var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+          $(this).on('click', function(){
+            swal(nameProduct, "is added to wishlist !", "success");
+
+            $(this).addClass('js-addedwish-detail');
+            $(this).off('click');
+          });
+        });
+
+        /*---------------------------------------------*/
+
+
+      </script>
+    <!--===============================================================================================-->
+      <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+      <script>
+        $('.js-pscroll').each(function(){
+          $(this).css('position','relative');
+          $(this).css('overflow','hidden');
+          var ps = new PerfectScrollbar(this, {
+            wheelSpeed: 1,
+            scrollingThreshold: 1000,
+            wheelPropagation: false,
+          });
+
+          $(window).on('resize', function(){
+            ps.update();
+          })
+        });
+      </script>
+    <!--===============================================================================================-->
+      <script src="js/main.js"></script>
+    </body>
+    </html>

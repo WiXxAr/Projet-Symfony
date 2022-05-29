@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+    <h1>Produit</h1>
+
+    <table class="table">
+        <tbody>
+          <!--  <tr>
+                <th>Id</th>
+                <td>{{ produit.id }}</td>
+            </tr> -->
+            <tr>
+                <th>Libelle</th>
+                <td>{{ produit.Libelle }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ produit.Prix }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ produit.Description }}</td>
+            </tr>
+          <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-success float-left">
+              Ajouter au Panier
+          </a>
+            <tr>
+                <th>QteStock</th>
+                <td>{{ produit.QteStock }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="../images/{{ produit.Image }}"></td>
+            </tr>
+        </tbody>
+    </table>
+    {% if app.user == true %}
+        {% for role in app.user.roles %}
+            {% if role == "ROLE_ADMIN" %}
+                <a href="{{ path('produit_index') }}">back to list</a>
+
+                <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
+
+                {{ include('produit/_delete_form.html.twig') }}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
