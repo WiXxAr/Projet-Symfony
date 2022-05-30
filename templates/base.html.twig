@@ -78,6 +78,8 @@
             <i class="zmdi zmdi-account"></i>
           </a>
         </div>
+        
+        <!-- un bouton se déconnecter apparait lorsqu'un simple utilisateur se connecte sur le site -->
       {% endif %}
 
                 {% if app.user == true %}
@@ -86,6 +88,9 @@
                           <div class="col-2">
                             <button class="btn btn-dark btn-sm" onclick="window.location.href ='/logout';" style="/*position: absolute; bottom:50px; right: -10px; */">Se déconnecter</button>
                           </div>
+                          
+                          <!-- un bouton ajouter produit apparait lorsqu'un administrateur se connecte sur le site -->
+                          
                         {% elseif role == "ROLE_ADMIN" %}
                         <div class="col-1">
                           <button class="btn btn-dark btn-sm " onclick="window.location.href = '/produit/new';" style="/*position: absolute; bottom:50px; right: 100px; */">Ajouter Produit</button>
